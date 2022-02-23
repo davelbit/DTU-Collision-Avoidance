@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "collison"
+version = "0.1.0"
+description = ""
+authors = ["davelbit <s202385@student.dtu.dk>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+matplotlib = "^3.5.1"
+numpy = "^1.22.1"
+opencv-contrib-python = "^4.5.5"
+jupyter = "^1.0.0"
+ipykernel = "^6.7.0"
+tqdm = "^4.62.3"
+EasyPySpin = "^2.0.1"
+pyspin = "^1.1.1"
+Pillow = "^9.0.1"
+keyboard = "^0.13.5"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
