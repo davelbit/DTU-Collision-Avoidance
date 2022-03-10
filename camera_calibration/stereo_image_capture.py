@@ -36,8 +36,8 @@ while capL.isOpened() and capR.isOpened():
         break
 
     elif k == ord("s"):  # wait for 's' key to save and exit
-        cv2.imwrite(f"images/stereo_left/imageL{num}.png", imgL)
-        cv2.imwrite(f"images/stereo_right/imageR{num}.png", imgR)
+        cv2.imwrite(f"images/stereo_left/imageLu{num}.png", imgL)
+        cv2.imwrite(f"images/stereo_right/imageRu{num}.png", imgR)
         print(f"{num}: images saved!")
         num += 1
 

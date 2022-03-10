@@ -24,7 +24,9 @@ def get_object_points_and_image_points(chessboardSize=(9, 6)):
 
     # termination criteria
     criteria = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 30, 0.001)
-    frameSize = (3208, 2200)
+    # frameSize = (3208, 2200)
+    # frameSize = (1080, 720)
+    frameSize = (720, 480)
 
     # prepare object points, like (0,0,0), (1,0,0), (2,0,0) ....,(6,5,0)
     objp = np.zeros((chessboardSize[0] * chessboardSize[1], 3), np.float32)
@@ -72,7 +74,7 @@ def get_object_points_and_image_points(chessboardSize=(9, 6)):
         retR, cornersR = cv.findChessboardCorners(grayR, chessboardSize, None)
 
         # If found, add object points, image points (after refining them)
-        if retL and retR == True:
+        if retL and retR:
 
             objpoints.append(objp)
 
@@ -103,7 +105,9 @@ def get_object_points_and_image_points(chessboardSize=(9, 6)):
 
 def calibration(objpoints, cameraL, cameraR):
     """Create the calibration data for the respective cameras"""
-    frameSize = (3208, 2200)
+    # frameSize = (3208, 2200)
+    # frameSize = (1080, 720)
+    frameSize = (720, 480)
 
     retL, cameraMatrixL, distL, rvecsL, tvecsL = cv.calibrateCamera(
         objpoints, cameraL.get("imgpointsL"), frameSize, None, None
@@ -164,11 +168,20 @@ def calc_essential_and_fundamental_matrix(objpoints, cameraL, cameraR):
     cameraL.update({"newCameraMatrixL": newCameraMatrixL, "distL": distL})
     cameraR.update({"newCameraMatrixR": newCameraMatrixR, "distR": distR})
 
+    print("###################")
+    print(cameraL.get("newCameraMatrixL"))
+    print(cameraR.get("newCameraMatrixR"))
+    print("###################")
+
     return (cameraL, cameraR, rot, trans)
 
 
 def save_rectified_calibraton_data(cameraL, cameraR, rot, trans):
     """Rectify stereo cameras and save the calibration data"""
+    # print("###################")
+    # print(cameraL.get("newCameraMatrixL"))
+    # print(cameraR.get("newCameraMatrixR"))
+    # print("###################")
 
     rectifyScale = 1
     rectL, rectR, projMatrixL, projMatrixR, Q, roi_L, roi_R = cv.stereoRectify(
